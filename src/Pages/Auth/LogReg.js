@@ -28,7 +28,7 @@ const LogReg = () => {
         textshadow='3px 2px 2px white'
         display="flex"
         flexDirection="column"
-        
+
         sx={{
           background: 'linear-gradient(to right,  black, purple, navy, black)',
           backgroundSize: 'cover',

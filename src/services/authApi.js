@@ -7,25 +7,25 @@ export const authApi = createApi({
 
   endpoints: (builder) => ({
 
-    userReg: builder.mutation({                     
-      query:(user)=>{
-        return{
-            url: 'reg',
-            method:'POST',
-            body: user,
-            headers:{
-                'Content-type': 'application/json',
-            }
+    userReg: builder.mutation({
+      query: (user) => {
+        return {
+          url: 'reg',
+          method: 'POST',
+          body: user,
+          headers: {
+            'Content-type': 'application/json',
+          }
         }
       }
     }),
     userLogin: builder.mutation({
-      query:(user)=>{
-        return{
+      query: (user) => {
+        return {
           url: 'login',
           method: 'POST',
           body: user,
-          headers:{
+          headers: {
             'Content-type': 'application/json'
           }
         }
@@ -55,7 +55,7 @@ export const authApi = createApi({
         }
       }
     }),
-})
+  })
 })
 
-export const {useUserRegMutation, useUserLoginMutation , useVerifyOTPMutation, useVerifyloginOTPMutation} =authApi  
+export const { useUserRegMutation, useUserLoginMutation, useVerifyOTPMutation, useVerifyloginOTPMutation } = authApi  

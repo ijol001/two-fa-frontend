@@ -10,11 +10,11 @@ const Navbar = () => {
             <AppBar position='static' sx={{ color: 'white', backgroundColor: 'navy' }}>
                 <Toolbar>
                     <Typography fontSize='22px' fontFamily='forte' component="div" sx={{ flexGrow: 2 }}>
-                        Authentication 
+                        Authentication
                     </Typography>
 
                     <Button component={NavLink} to='/' style={({ isActive }) => { return { backgroundColor: isActive ? 'white' : '', color: isActive ? 'black' : '' } }} sx={{ color: 'white', fontFamily: 'serif', fontSize: '20px', textTransform: 'none' }}>Sign-in </Button>
-                    {token && <Button component={NavLink} to='/dashboard' style={({ isActive }) => { return { backgroundColor: isActive ? 'white' : '', color: isActive ? 'black' : '' } }} sx={{ color: 'white', fontFamily: 'serif', fontSize: '20px', textTransform: 'none' }}>Dashboard</Button> 
+                    {token && <Button component={NavLink} to='/dashboard' style={({ isActive }) => { return { backgroundColor: isActive ? 'white' : '', color: isActive ? 'black' : '' } }} sx={{ color: 'white', fontFamily: 'serif', fontSize: '20px', textTransform: 'none' }}>Dashboard</Button>
                     }
 
                 </Toolbar>

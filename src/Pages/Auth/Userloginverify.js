@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Tabs, Tab, TextField, Alert, CircularProgress, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { storeToken, getAuthId,getTempUserDetails, removeAuthId, removeTempUserDetails } from '../../services/LocalStorage';
+import { storeToken, getAuthId, getTempUserDetails, removeAuthId, removeTempUserDetails } from '../../services/LocalStorage';
 import { useVerifyloginOTPMutation } from '../../services/authApi';
 
 const Userloginverify = () => {
@@ -30,7 +30,7 @@ const Userloginverify = () => {
     try {
       const res = await verifyLoginOTP(GetactualData).unwrap();
       if (res.status === 'success') {
-        handleErrorTimeout(res.message,'success' );
+        handleErrorTimeout(res.message, 'success');
         storeToken(res.token);
         removeAuthId();
         removeTempUserDetails();
@@ -39,10 +39,10 @@ const Userloginverify = () => {
           window.location.reload();
         }, 4000);
       } else {
-        handleErrorTimeout( res.message,'error' );
+        handleErrorTimeout(res.message, 'error');
       }
     } catch (err) {
-      handleErrorTimeout("OTP verification failed", 'error' );
+      handleErrorTimeout("OTP verification failed", 'error');
     }
   };
 

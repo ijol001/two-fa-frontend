@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, Grid,  Button, Alert, TextField, InputAdornment, IconButton, CircularProgress} from '@mui/material';
+import { Box, Grid, Button, Alert, TextField, InputAdornment, IconButton, CircularProgress } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useUserRegMutation} from '../../services/authApi';
-import {  storeAuthId, getAuthId,storeTempUserDetails } from '../../services/LocalStorage';
+import { useUserRegMutation } from '../../services/authApi';
+import { storeAuthId, getAuthId, storeTempUserDetails } from '../../services/LocalStorage';
 
 
 const UserReg = () => {
@@ -24,11 +24,11 @@ const UserReg = () => {
     if (error.status) {
       const timer = setTimeout(() => {
         setError(prevError => ({ ...prevError, status: false }));
-      }, 3000); 
+      }, 3000);
       return () => clearTimeout(timer);
     }
   }, [error.status]);
-  
+
   const navigate = useNavigate();
   const [userReg, { isLoading }] = useUserRegMutation();
 
@@ -57,21 +57,21 @@ const UserReg = () => {
       password: data.get('password'),
       password_confirmation: data.get('password_confirmation'),
     };
-  
+
     if (actualData.first_name && actualData.last_name && actualData.email && actualData.password && actualData.password_confirmation) {
       if (!emailRegex.test(actualData.email)) {
-        handleErrorTimeout('Please enter a valid email address', 'error' );
+        handleErrorTimeout('Please enter a valid email address', 'error');
         return;
       }
       if (!passwordRegex.test(actualData.password)) {
-        handleErrorTimeout( "Password must be at least 8 characters long and contain at least one special character and one alphanumeric character.", 'error' );
+        handleErrorTimeout("Password must be at least 8 characters long and contain at least one special character and one alphanumeric character.", 'error');
         return;
       }
       if (actualData.password === actualData.password_confirmation) {
         try {
           const res = await userReg(actualData).unwrap();
           console.log('Response:', res);
-  
+
           if (res && res.status === 'success') {
             if (res.authid) {
               setAuthId(authid);
@@ -83,24 +83,24 @@ const UserReg = () => {
               },);
             } else {
               console.error('authid is not defined in the response:', res);
-              handleErrorTimeout('Error during registration: authid is missing','error' );
+              handleErrorTimeout('Error during registration: authid is missing', 'error');
             }
           } else if (res && res.status === 'failed') {
             console.error('Error during registration:', res.message);
-            handleErrorTimeout( res.message, 'error' );
+            handleErrorTimeout(res.message, 'error');
           } else {
             console.error('Unexpected response structure:', res);
-            handleErrorTimeout('Unexpected response structure',  'error' );
+            handleErrorTimeout('Unexpected response structure', 'error');
           }
         } catch (error) {
           console.error('Error during registration:', error);
-          handleErrorTimeout('Error during registration', 'error' );
+          handleErrorTimeout('Error during registration', 'error');
         }
       } else {
-        handleErrorTimeout("Password and Confirm Password don't match!",'error' );
+        handleErrorTimeout("Password and Confirm Password don't match!", 'error');
       }
     } else {
-      handleErrorTimeout('All fields are required', 'error' );
+      handleErrorTimeout('All fields are required', 'error');
     }
   };
 
@@ -111,32 +111,32 @@ const UserReg = () => {
   return (
     <>
       <h2 style={{ textAlign: 'center', color: 'navy' }}>Welcome!!!</h2>
-        
-          <Box component="form" noValidate sx={{ mt: 0, p: 1, maxWidth: '400px', margin: 'auto' }} id="reg-form" onSubmit={handleSendOTP}>
-            <Grid container spacing={1}>
-              <Grid item xs={6}>
-                <TextField margin="normal" required fullWidth id="first_name" name="first_name" label="First Name" />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField margin="normal" required fullWidth id="last_name" name="last_name" label="Last Name" />
-              </Grid>
-            </Grid>
-            <TextField margin="normal" required fullWidth id="email" name="email" label="Email Address" />
-            <TextField
-              margin='normal' required fullWidth id='password' name='password' type={showPassword ? 'text' : 'password'} label='Password' InputProps={{
-                endAdornment: (
-                  <InputAdornment position='end'>
-                    <IconButton onClick={handlePasswordVisibility} edge='end'>
-                      {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
-              margin='normal' required fullWidth id='password_confirmation' name='password_confirmation' type='password' label='Confirm Password' />
 
-<Box sx={{ textAlign: 'center', mt: 1, color: 'white' }}>
+      <Box component="form" noValidate sx={{ mt: 0, p: 1, maxWidth: '400px', margin: 'auto' }} id="reg-form" onSubmit={handleSendOTP}>
+        <Grid container spacing={1}>
+          <Grid item xs={6}>
+            <TextField margin="normal" required fullWidth id="first_name" name="first_name" label="First Name" />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField margin="normal" required fullWidth id="last_name" name="last_name" label="Last Name" />
+          </Grid>
+        </Grid>
+        <TextField margin="normal" required fullWidth id="email" name="email" label="Email Address" />
+        <TextField
+          margin='normal' required fullWidth id='password' name='password' type={showPassword ? 'text' : 'password'} label='Password' InputProps={{
+            endAdornment: (
+              <InputAdornment position='end'>
+                <IconButton onClick={handlePasswordVisibility} edge='end'>
+                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <TextField
+          margin='normal' required fullWidth id='password_confirmation' name='password_confirmation' type='password' label='Confirm Password' />
+
+        <Box sx={{ textAlign: 'center', mt: 1, color: 'white' }}>
           {isLoading ? (
             <CircularProgress />
           ) : (
@@ -149,8 +149,8 @@ const UserReg = () => {
             </Button>
           )}
         </Box>
-            {error.status && <Alert severity={error.type} sx={{ textAlign: 'center' }}>{error.msg}</Alert>}
-          </Box>    
+        {error.status && <Alert severity={error.type} sx={{ textAlign: 'center' }}>{error.msg}</Alert>}
+      </Box>
     </>
   )
 }

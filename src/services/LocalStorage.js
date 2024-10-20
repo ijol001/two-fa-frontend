@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js';
 
-const secretKey = 'hjhfi567#HGGUY&^^*^GHVUYGIfuyqqyd8d7y1';
+const secretKey = 'YOUR SECRET KEY';
 
 const encryptData = (data) => {
   try {
